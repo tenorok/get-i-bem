@@ -1,7 +1,7 @@
 {
     "name": "i-bem",
     "version": "0.1.0",
-    "main": "build/i-bem/i-bem.js",
+    "main": "i-bem/i-bem.js",
     "license": "MIT",
     "ignore": [
         ".bem",
