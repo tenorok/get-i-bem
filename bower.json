@@ -1,13 +1,14 @@
 {
     "name": "i-bem",
-    "version": "0.1.0",
-    "main": "build/i-bem/i-bem.js",
+    "version": "0.1.1",
+    "main": "i-bem/i-bem.js",
     "license": "MIT",
     "ignore": [
         ".bem",
         "**/.*",
-        "i-bem/i-bem.bemdecl.js",
+        "i-bem",
         "*.md",
+        "Makefile",
         "package.json"
     ],
     "keywords": [

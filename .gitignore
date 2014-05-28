@@ -3,3 +3,6 @@ node_modules/
 
 i-bem
 !i-bem/*.bemdecl.js
+
+i-bem.js
+i-bem.min.js
