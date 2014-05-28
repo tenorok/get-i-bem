@@ -1,0 +1,20 @@
+{
+    "name": "i-bem",
+    "version": "0.1.0",
+    "main": "build/i-bem/i-bem.js",
+    "license": "MIT",
+    "ignore": [
+        ".bem",
+        "**/.*",
+        "i-bem",
+        "!i-bem/i-bem.js",
+        "!i-bem/i-bem.min.js",
+        "*.md",
+        "package.json"
+    ],
+    "keywords": [
+        "bem",
+        "i-bem",
+        "library"
+    ]
+}
