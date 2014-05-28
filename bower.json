@@ -8,6 +8,7 @@
         "**/.*",
         "i-bem",
         "*.md",
+        "Makefile",
         "package.json"
     ],
     "keywords": [
