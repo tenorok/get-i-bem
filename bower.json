@@ -6,9 +6,7 @@
     "ignore": [
         ".bem",
         "**/.*",
-        "i-bem",
-        "!i-bem/i-bem.js",
-        "!i-bem/i-bem.min.js",
+        "i-bem/i-bem.bemdecl.js",
         "*.md",
         "package.json"
     ],
