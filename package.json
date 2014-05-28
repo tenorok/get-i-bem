@@ -14,9 +14,8 @@
     "license": "MIT",
     "devDependencies": {
         "enb": "0.13.1",
-        "enb-diverse-js": "v0.1.0",
         "enb-borschik": "1.0.4",
-        "bem-core": "git://github.com/bem/bem-core#v2.2.2"
+        "bem-bl": "git://github.com/bem/bem-bl#dev"
     },
     "scripts": {
         "make": "./node_modules/.bin/enb make"

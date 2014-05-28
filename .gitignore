@@ -1,5 +1,5 @@
 node_modules/
 .bem/tmp/
 
-build/*/**
-!build/*/*.bemdecl.js
+i-bem
+!i-bem/*.bemdecl.js
