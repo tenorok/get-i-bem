@@ -1,5 +1,5 @@
 module.exports = function(config) {
-    config.node('build/i-bem', function(nodeConfig) {
+    config.node('i-bem', function(nodeConfig) {
 
         nodeConfig.addTechs([
             [ require('enb/techs/levels'), { levels: getLevels(config) } ],
