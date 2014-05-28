@@ -1,0 +1,5 @@
+node_modules/
+.bem/tmp/
+
+i-bem
+!i-bem/*.bemdecl.js

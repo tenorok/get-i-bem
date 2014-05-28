@@ -1,10 +1,10 @@
 {
-    "name": "getibem",
+    "name": "get-i-bem",
     "description": "Builder i-bem",
     "version": "0.1.0",
     "repository": {
         "type": "git",
-        "url": "https://github.com/tenorok/getibem.git"
+        "url": "https://github.com/tenorok/get-i-bem.git"
     },
     "author": {
         "name": "Artem Kurbatov",
@@ -14,8 +14,10 @@
     "license": "MIT",
     "devDependencies": {
         "enb": "0.13.1",
-        "enb-diverse-js": "v0.1.0",
         "enb-borschik": "1.0.4",
-        "bem-core": "git://github.com/bem/bem-core#v2.2.2"
+        "bem-bl": "git://github.com/bem/bem-bl#dev"
+    },
+    "scripts": {
+        "make": "./node_modules/.bin/enb make"
     }
 }
