@@ -18,12 +18,17 @@ module.exports = function(grunt) {
         },
         shell: {
             make: { command: 'npm run make' },
+
+            addJSONFiles: { command: 'git add ' + jsonFiles.join(' ') },
+            commitJSONFiles: { command: 'git commit -m "' + releaseTag + '"' },
+
             addReleaseBranch: { command: 'git checkout -b ' + releaseBranch },
-            add: { command: 'git add -f ' + ibem + ' ' + ibemmin + ' ' + jsonFiles.join(' ') },
-            commit: { command: 'git commit -m "' + releaseTag + '" -m "' + getBemBlVersion() + '"' },
+            addBuildFiles: { command: 'git add -f ' + ibem + ' ' + ibemmin },
+            commitBuildFiles: { command: 'git commit -m "' + releaseTag + '" -m "' + getBemBlVersion() + '"' },
             tag: { command: 'git tag ' + releaseTag },
             removeReleaseBranch: { command: 'git checkout master && git branch -D ' + releaseBranch },
-            push: { command: 'git push origin ' + releaseTag }
+            mergeBemBlToMaster: { command: 'git merge --no-ff bem-bl -m "' + releaseTag + '"' },
+            push: { command: 'git push origin master bem-bl ' + releaseTag }
         },
         copy: {
             ibem: {
@@ -54,11 +59,15 @@ module.exports = function(grunt) {
         'copy',
         'version',
 
+        'shell:addJSONFiles',
+        'shell:commitJSONFiles',
+
         'shell:addReleaseBranch',
-        'shell:add',
-        'shell:commit',
+        'shell:addBuildFiles',
+        'shell:commitBuildFiles',
         'shell:tag',
         'shell:removeReleaseBranch',
+        'shell:mergeBemBlToMaster',
         'shell:push'
     ]);
 
