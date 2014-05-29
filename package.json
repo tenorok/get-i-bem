@@ -15,7 +15,13 @@
     "devDependencies": {
         "enb": "0.13.1",
         "enb-borschik": "1.0.4",
-        "bem-bl": "git://github.com/bem/bem-bl#dev"
+        "bem-bl": "git://github.com/bem/bem-bl#dev",
+        "grunt": "~0.4.2",
+        "grunt-contrib-copy": "~0.5.0",
+        "load-grunt-tasks": "~0.4.0",
+        "grunt-cli": "~0.1.13",
+        "grunt-shell": "~0.6.4",
+        "grunt-contrib-clean": "~0.5.0"
     },
     "scripts": {
         "make": "./node_modules/.bin/enb make"
