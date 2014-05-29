@@ -8,7 +8,7 @@
         "**/.*",
         "i-bem",
         "*.md",
-        "Makefile",
+        "Gruntfile.js",
         "package.json"
     ],
     "keywords": [
