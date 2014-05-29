@@ -1,5 +1,5 @@
 .header {
-    background: #53DA5D;
+    background: #C4F1FA;
 }
     .header__content {
         width: 900px;
@@ -12,14 +12,14 @@
             width: 450px;
         }
         .header__info {
-            margin-left: 500px;
-            padding: 20px 40px;
+            margin-left: 525px;
+            padding: 20px 30px;
         }
             .header__title {
                 margin: 0;
 
                 font-size: 100px;
-                color: #DF4725;
+                color: #DF2552;
             }
             .header__description {
                 line-height: 24px;
@@ -104,7 +104,7 @@
                 }
 .content {
     width: 900px;
-    margin: 0 auto;
+    margin: 50px auto 0;
 
     font-size: 14px;
 }
@@ -124,7 +124,12 @@
 .link {
     color: #0A52CA;
 }
-
 .link:hover {
     color: #DF4725;
+}
+
+.hint {
+    margin-left: 10px;
+
+    color: #777;
 }
