@@ -1,7 +1,9 @@
 module.exports = function(grunt) {
     require('load-grunt-tasks')(grunt);
 
-    var version = grunt.option('ver'),
+    var fs = require('fs'),
+        version = grunt.option('ver'),
+        jsonFiles = ['package.json', 'bower.json'],
         ibem = 'i-bem-' + version + '.js',
         ibemmin = 'i-bem-' + version + '.min.js',
         releaseBranch = 'release-' + version,
@@ -17,8 +19,8 @@ module.exports = function(grunt) {
         shell: {
             make: { command: 'npm run make' },
             addReleaseBranch: { command: 'git checkout -b ' + releaseBranch },
-            add: { command: 'git add -f ' + ibem + ' ' + ibemmin },
-            commit: { command: 'git commit -m "' + releaseTag + '"' },
+            add: { command: 'git add -f ' + ibem + ' ' + ibemmin + ' ' + jsonFiles.join(' ') },
+            commit: { command: 'git commit -m "' + releaseTag + '" -m "' + getBemBlVersion() + '"' },
             tag: { command: 'git tag ' + releaseTag },
             removeReleaseBranch: { command: 'git checkout master && git branch -D ' + releaseBranch },
             push: { command: 'git push origin ' + releaseTag }
@@ -35,9 +37,12 @@ module.exports = function(grunt) {
         }
     });
 
+    function getBemBlVersion() {
+        return JSON.parse(fs.readFileSync('node_modules/bem-bl/package.json', { encoding: 'utf8' }))._resolved;
+    }
+
     grunt.registerTask('version', function() {
-        var fs = require('fs');
-        ['package.json', 'bower.json'].forEach(function(file) {
+        jsonFiles.forEach(function(file) {
             var json = JSON.parse(fs.readFileSync(file, { encoding: 'utf8' }));
             json.version = version;
             fs.writeFileSync(file, JSON.stringify(json, undefined, '    ') + '\n');
