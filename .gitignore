@@ -4,7 +4,7 @@ node_modules/
 i-bem
 !i-bem/*.bemdecl.js
 
-i-bem-*.js
-i-bem-*.min.js
+i-bem.js
+i-bem.min.js
 
 blocks/jsdoc/jsdoc.js

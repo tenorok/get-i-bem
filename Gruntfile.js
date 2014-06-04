@@ -5,8 +5,8 @@ module.exports = function(grunt) {
         Release = require('./tasks/Release'),
         version = grunt.option('ver'),
         jsonFiles = ['package.json', 'bower.json'],
-        ibem = 'i-bem-' + version + '.js',
-        ibemmin = 'i-bem-' + version + '.min.js',
+        ibem = 'i-bem.js',
+        ibemmin = 'i-bem.min.js',
         releaseBranch = 'release-' + version,
         releaseTag = 'v' + version;
 
@@ -31,6 +31,14 @@ module.exports = function(grunt) {
             mergeBemBlToMaster: { command: 'git merge --no-ff bem-bl -m "' + releaseTag + '"' },
             push: { command: 'git push origin master bem-bl ' + releaseTag }
         },
+        uglify: {
+            release: {
+                options: {
+                    preserveComments: 'some'
+                },
+                files: { 'i-bem/i-bem.min.js': 'i-bem/i-bem.js' }
+            }
+        },
         copy: {
             ibem: {
                 src: 'i-bem/i-bem.js',
@@ -40,14 +48,6 @@ module.exports = function(grunt) {
                 src: 'i-bem/i-bem.min.js',
                 dest: ibemmin
             }
-        },
-        uglify: {
-            release: {
-                options: {
-                    preserveComments: 'some'
-                },
-                files: { 'i-bem/i-bem.min.js': 'i-bem/i-bem.js' }
-            }
         }
     });
 
@@ -56,17 +56,14 @@ module.exports = function(grunt) {
     }
 
     grunt.registerTask('version', function() {
-        jsonFiles.forEach(function(file) {
-            var json = JSON.parse(fs.readFileSync(file, { encoding: 'utf8' }));
-            json.version = version;
-            fs.writeFileSync(file, JSON.stringify(json, undefined, '    ') + '\n');
-        });
+        new Release(version).setJsDoc().updateJsonFiles(jsonFiles);
     });
 
     grunt.registerTask('publish', [
-        'shell:make',
-        'copy',
         'version',
+        'shell:make',
+        'uglify:release',
+        'copy',
 
         'shell:addJSONFiles',
         'shell:commitJSONFiles',
