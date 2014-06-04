@@ -6,7 +6,10 @@
     "ignore": [
         ".bem",
         "**/.*",
+        "blocks",
         "i-bem",
+        "tasks",
+        "techs",
         "*.md",
         "Gruntfile.js",
         "package.json"
