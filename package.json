@@ -1,7 +1,7 @@
 {
     "name": "get-i-bem",
     "description": "Builder i-bem",
-    "version": "0.1.3",
+    "version": "0.1.4",
     "repository": {
         "type": "git",
         "url": "https://github.com/tenorok/get-i-bem.git"
