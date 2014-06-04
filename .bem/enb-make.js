@@ -17,6 +17,7 @@ module.exports = function(config) {
 function getLevels(config) {
     return [
         'node_modules/bem-bl/blocks-common',
-        'node_modules/bem-bl/blocks-desktop'
+        'node_modules/bem-bl/blocks-desktop',
+        'blocks'
     ].map(function(levelPath) { return config.resolvePath(levelPath); });
 }
