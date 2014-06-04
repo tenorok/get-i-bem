@@ -6,8 +6,7 @@ module.exports = function(config) {
             [ require('enb/techs/file-provider'), { target: '?.bemdecl.js' } ],
             require('enb/techs/deps-old'),
             require('enb/techs/files'),
-            require('../techs/js'),
-            [ require('enb-borschik/techs/borschik'), { sourceTarget: '?.js', destTarget: '?.min.js', minify: true } ]
+            require('../techs/js')
         ]);
 
         nodeConfig.addTargets(['?.js', '?.min.js']);

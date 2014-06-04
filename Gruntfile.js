@@ -2,6 +2,7 @@ module.exports = function(grunt) {
     require('load-grunt-tasks')(grunt);
 
     var fs = require('fs'),
+        Release = require('./tasks/Release'),
         version = grunt.option('ver'),
         jsonFiles = ['package.json', 'bower.json'],
         ibem = 'i-bem-' + version + '.js',
@@ -38,6 +39,14 @@ module.exports = function(grunt) {
             ibemmin: {
                 src: 'i-bem/i-bem.min.js',
                 dest: ibemmin
+            }
+        },
+        uglify: {
+            release: {
+                options: {
+                    preserveComments: 'some'
+                },
+                files: { 'i-bem/i-bem.min.js': 'i-bem/i-bem.js' }
             }
         }
     });
