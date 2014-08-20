@@ -9,14 +9,14 @@ module.exports = function(config) {
             require('../techs/js')
         ]);
 
-        nodeConfig.addTargets(['?.js', '?.min.js']);
+        nodeConfig.addTargets(['?.js']);
     });
 };
 
 function getLevels(config) {
     return [
-        'node_modules/bem-bl/blocks-common',
-        'node_modules/bem-bl/blocks-desktop',
+        'bower_components/bem-bl/blocks-common',
+        'bower_components/bem-bl/blocks-desktop',
         'blocks'
     ].map(function(levelPath) { return config.resolvePath(levelPath); });
 }

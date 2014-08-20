@@ -18,6 +18,7 @@ module.exports = function(grunt) {
             release: ['release']
         },
         shell: {
+            install: { command: 'bower install git://github.com/bem/bem-bl#' + version },
             make: { command: 'npm run make' },
 
             addJSONFiles: { command: 'git add ' + jsonFiles.join(' ') },
@@ -25,7 +26,7 @@ module.exports = function(grunt) {
 
             addReleaseBranch: { command: 'git checkout -b ' + releaseBranch },
             addBuildFiles: { command: 'git add -f ' + ibem + ' ' + ibemmin },
-            commitBuildFiles: { command: 'git commit -m "' + releaseTag + '" -m "' + getBemBlVersion() + '"' },
+            commitBuildFiles: { command: 'git commit -m "' + releaseTag + '" -m "' + version + '"' },
             tag: { command: 'git tag ' + releaseTag },
             removeReleaseBranch: { command: 'git checkout master && git branch -D ' + releaseBranch },
             mergeBemBlToMaster: { command: 'git merge --no-ff bem-bl -m "' + releaseTag + '"' },
@@ -51,30 +52,25 @@ module.exports = function(grunt) {
         }
     });
 
-    function getBemBlVersion() {
-        return JSON.parse(fs.readFileSync('node_modules/bem-bl/package.json', { encoding: 'utf8' }))._resolved;
-    }
+    grunt.registerTask('release', function() {
+        if(!version) throw new Error('Parameter --ver must be set!');
 
-    grunt.registerTask('version', function() {
         new Release(version).setJsDoc().updateJsonFiles(jsonFiles);
+
+        grunt.task.run('shell:install', 'shell:make');
+        grunt.task.run('uglify:release', 'copy');
+
+        grunt.task.run('shell:addJSONFiles', 'shell:commitJSONFiles');
+
+        grunt.task.run(
+            'shell:addReleaseBranch',
+            'shell:addBuildFiles',
+            'shell:commitBuildFiles',
+            'shell:tag',
+            'shell:removeReleaseBranch',
+            'shell:mergeBemBlToMaster',
+            'shell:push'
+        );
     });
-
-    grunt.registerTask('publish', [
-        'version',
-        'shell:make',
-        'uglify:release',
-        'copy',
-
-        'shell:addJSONFiles',
-        'shell:commitJSONFiles',
-
-        'shell:addReleaseBranch',
-        'shell:addBuildFiles',
-        'shell:commitBuildFiles',
-        'shell:tag',
-        'shell:removeReleaseBranch',
-        'shell:mergeBemBlToMaster',
-        'shell:push'
-    ]);
 
 };
