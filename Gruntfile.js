@@ -26,7 +26,7 @@ module.exports = function(grunt) {
 
             addReleaseBranch: { command: 'git checkout -b ' + releaseBranch },
             addBuildFiles: { command: 'git add -f ' + ibem + ' ' + ibemmin },
-            commitBuildFiles: { command: 'git commit -m "' + releaseTag + '" -m "' + version + '"' },
+            commitBuildFiles: { command: 'git commit -m "' + releaseTag + '"' },
             tag: { command: 'git tag ' + releaseTag },
             removeReleaseBranch: { command: 'git checkout master && git branch -D ' + releaseBranch },
             mergeBemBlToMaster: { command: 'git merge --no-ff bem-bl -m "' + releaseTag + '"' },
