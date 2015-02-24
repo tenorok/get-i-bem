@@ -1,5 +1,5 @@
 ({
     mustDeps: [
-        { block: 'jsdoc' }
+        { block: 'i-bem', elem: 'internal' }
     ]
 });

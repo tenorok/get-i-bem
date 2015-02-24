@@ -3,9 +3,6 @@
         { block: 'jquery' }
     ],
     mustDeps: [
-        { block: 'i-jquery' }
-    ],
-    shouldDeps: [
-        { mods: { init: 'auto' }}
+        { block: 'dom' }
     ]
 });

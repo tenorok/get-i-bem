@@ -1,3 +1,3 @@
 exports.blocks = [
-    { block : 'i-bem', elems: ['dom'] }
+    { block : 'i-bem', elem: 'dom', mods: { init: 'auto' }}
 ];
