@@ -2,7 +2,7 @@ node_modules/
 bower_components/
 .bem/tmp/
 
-i-bem
+i-bem/*
 !i-bem/*.bemdecl.js
 
 i-bem.js

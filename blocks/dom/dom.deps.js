@@ -1,0 +1,5 @@
+({
+    noDeps: [
+        { block: 'jquery' }
+    ]
+});

@@ -20,7 +20,7 @@ Release.prototype = {
         fs.writeFileSync(path.join(__dirname, '../blocks/jsdoc/jsdoc.js'), '/*!\n' +
             ' * @file i-bem — library to write client side with BEM methodology\n' +
             ' * @version ' + this.version + '\n' +
-            ' * @tutorial http://ru.bem.info/libs/bem-bl/dev/desktop.sets/i-bem/\n' +
+            ' * @tutorial https://ru.bem.info/libs/bem-core/v' + this.version + '/desktop/i-bem/\n' +
             ' * @link https://github.com/bem-node/i-bem-doc\n' +
             ' */\n');
         return this;

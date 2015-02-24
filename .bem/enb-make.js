@@ -6,7 +6,9 @@ module.exports = function(config) {
             [ require('enb/techs/file-provider'), { target: '?.bemdecl.js' } ],
             require('enb/techs/deps-old'),
             require('enb/techs/files'),
-            require('../techs/js')
+            [ require('../techs/js'), {
+                sourceSuffixes : ['vanilla.js', 'js', 'browser.js']
+            } ]
         ]);
 
         nodeConfig.addTargets(['?.js']);
@@ -15,8 +17,7 @@ module.exports = function(config) {
 
 function getLevels(config) {
     return [
-        'bower_components/bem-bl/blocks-common',
-        'bower_components/bem-bl/blocks-desktop',
+        'bower_components/bem-core/common.blocks',
         'blocks'
     ].map(function(levelPath) { return config.resolvePath(levelPath); });
 }

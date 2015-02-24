@@ -18,7 +18,7 @@ module.exports = function(grunt) {
             release: ['release']
         },
         shell: {
-            install: { command: 'bower install git://github.com/bem/bem-bl#' + version },
+            install: { command: 'bower install git://github.com/bem/bem-core#' + version },
             make: { command: 'npm run make' },
 
             addJSONFiles: { command: 'git add ' + jsonFiles.join(' ') },
