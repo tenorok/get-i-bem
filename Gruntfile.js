@@ -49,8 +49,19 @@ module.exports = function(grunt) {
                 src: 'i-bem/i-bem.min.js',
                 dest: ibemmin
             }
+        },
+        mochaTest: {
+            test: {
+                options: {
+                    reporter: 'spec',
+                    require: './test/helpers/chai-assert.js'
+                },
+                src: ['test/*.js']
+            }
         }
     });
+
+    grunt.registerTask('test', ['mochaTest:test']);
 
     grunt.registerTask('release', function() {
         if(!version) throw new Error('Parameter --ver must be set!');

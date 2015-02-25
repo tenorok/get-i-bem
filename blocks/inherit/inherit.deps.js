@@ -1,6 +1,6 @@
 ({
     mustDeps: [
-        { block: 'modules' }
+        { block: 'jsdoc' }
     ],
     shouldDeps: [
         { block: 'identify' },
