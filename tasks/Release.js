@@ -3,10 +3,12 @@ var fs = require('fs'),
 /**
  * Класс для выпуска релиза.
  *
- * @param {string} version Версия в формате semver
+ * @param {string} versionReal Версия bem-core в формате semver
+ * @param {string} versionPlus Инкрементированная версия в формате semver
  */
-function Release(version) {
-    this.version = version;
+function Release(versionReal, versionPlus) {
+    this.versionReal = versionReal;
+    this.versionPlus = versionPlus;
 }
 
 Release.prototype = {
@@ -19,8 +21,8 @@ Release.prototype = {
     setJsDoc: function() {
         fs.writeFileSync(path.join(__dirname, '../blocks/jsdoc/jsdoc.js'), '/*!\n' +
             ' * @file i-bem — library to write client side with BEM methodology\n' +
-            ' * @version ' + this.version + '\n' +
-            ' * @tutorial https://ru.bem.info/libs/bem-core/v' + this.version + '/desktop/i-bem/\n' +
+            ' * @version ' + this.versionPlus + '\n' +
+            ' * @tutorial https://ru.bem.info/libs/bem-core/v' + this.versionReal + '/desktop/i-bem/\n' +
             ' * @link https://github.com/bem-node/i-bem-doc\n' +
             ' */\n');
         return this;
@@ -35,7 +37,7 @@ Release.prototype = {
     updateJsonFiles: function(files) {
         files.forEach(function(file) {
             var json = JSON.parse(fs.readFileSync(file, { encoding: 'utf8' }));
-            json.version = this.version;
+            json.version = this.versionPlus;
             fs.writeFileSync(file, JSON.stringify(json, undefined, '    ') + '\n');
         }, this);
         return this;

@@ -20,13 +20,14 @@
         "load-grunt-tasks": "~0.4.0",
         "grunt-cli": "~0.1.13",
         "grunt-shell": "~0.6.4",
+        "grunt-prompt": "~1.1.0",
         "grunt-contrib-clean": "~0.5.0",
         "grunt-contrib-uglify": "~0.4.0",
         "chai": "~1.8.1",
         "grunt-mocha-test": "~0.9.1"
     },
     "scripts": {
-        "make": "./node_modules/.bin/enb make"
+        "make": "./node_modules/.bin/enb make -n"
     },
     "private": true
 }

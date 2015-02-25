@@ -3,12 +3,15 @@ module.exports = function(grunt) {
 
     var fs = require('fs'),
         Release = require('./tasks/Release'),
-        version = grunt.option('ver'),
+        versionReal = grunt.option('ver'),
+        versionPlus = versionReal.split('.').map(function(part, index) {
+            return index === 0 ? Number(part) + 1 : part;
+        }).join('.'),
         jsonFiles = ['package.json', 'bower.json'],
         ibem = 'i-bem.js',
         ibemmin = 'i-bem.min.js',
-        releaseBranch = 'release-' + version,
-        releaseTag = 'v' + version;
+        releaseBranch = 'release-' + versionPlus,
+        releaseTag = 'v' + versionPlus;
 
     grunt.initConfig({
         clean: {
@@ -18,7 +21,7 @@ module.exports = function(grunt) {
             release: ['release']
         },
         shell: {
-            install: { command: 'bower install git://github.com/bem/bem-core#' + version },
+            install: { command: 'bower install git://github.com/bem/bem-core#' + versionReal },
             make: { command: 'npm run make' },
 
             addJSONFiles: { command: 'git add ' + jsonFiles.join(' ') },
@@ -29,8 +32,28 @@ module.exports = function(grunt) {
             commitBuildFiles: { command: 'git commit -m "' + releaseTag + '"' },
             tag: { command: 'git tag ' + releaseTag },
             removeReleaseBranch: { command: 'git checkout master && git branch -D ' + releaseBranch },
-            mergeBemBlToMaster: { command: 'git merge --no-ff bem-bl -m "' + releaseTag + '"' },
-            push: { command: 'git push origin master bem-bl ' + releaseTag }
+            mergeBemBlToMaster: { command: 'git merge --no-ff bem-core -m "' + releaseTag + '"' },
+            push:  {
+                command: function() {
+                    return grunt.config('isReleaseOk')
+                        ? 'git push origin master bem-core ' + releaseTag
+                        : '';
+                }
+            }
+        },
+        prompt: {
+            release: {
+                options: {
+                    questions: [
+                        {
+                            config: 'isReleaseOk',
+                            type: 'confirm',
+                            default: false,
+                            message: 'Please check is everything alright'
+                        }
+                    ]
+                }
+            }
         },
         uglify: {
             release: {
@@ -64,9 +87,9 @@ module.exports = function(grunt) {
     grunt.registerTask('test', ['mochaTest:test']);
 
     grunt.registerTask('release', function() {
-        if(!version) throw new Error('Parameter --ver must be set!');
+        if(!versionReal) throw new Error('Parameter --ver must be set!');
 
-        new Release(version).setJsDoc().updateJsonFiles(jsonFiles);
+        new Release(versionReal, versionPlus).setJsDoc().updateJsonFiles(jsonFiles);
 
         grunt.task.run('shell:install', 'shell:make');
         grunt.task.run('uglify:release', 'copy');
@@ -80,6 +103,7 @@ module.exports = function(grunt) {
             'shell:tag',
             'shell:removeReleaseBranch',
             'shell:mergeBemBlToMaster',
+            'prompt:release',
             'shell:push'
         );
     });
