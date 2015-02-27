@@ -3,7 +3,7 @@ module.exports = function(grunt) {
 
     var fs = require('fs'),
         Release = require('./tasks/Release'),
-        versionReal = grunt.option('ver'),
+        versionReal = grunt.option('ver') || '',
         versionPlus = versionReal.split('.').map(function(part, index) {
             return index === 0 ? Number(part) + 1 : part;
         }).join('.'),
@@ -84,7 +84,7 @@ module.exports = function(grunt) {
         }
     });
 
-    grunt.registerTask('test', ['mochaTest:test']);
+    grunt.registerTask('test', ['shell:make', 'mochaTest:test']);
 
     grunt.registerTask('release', function() {
         if(!versionReal) throw new Error('Parameter --ver must be set!');
@@ -92,6 +92,7 @@ module.exports = function(grunt) {
         new Release(versionReal, versionPlus).setJsDoc().updateJsonFiles(jsonFiles);
 
         grunt.task.run('shell:install', 'shell:make');
+        grunt.task.run('test');
         grunt.task.run('uglify:release', 'copy');
 
         grunt.task.run('shell:addJSONFiles', 'shell:commitJSONFiles');
