@@ -15,6 +15,7 @@ describe('Проверка результатов сборки.', function() {
                 { block: 'i-bem' },
                 { block: 'i-bem', mod: 'provide', val: 'global' },
                 { block: 'i-jquery' },
+                { block: 'inherit', mod: 'provide', val: 'jquery' },
                 { block: 'dom' },
                 { block: 'i-bem', elem: 'dom' },
                 { block: 'i-bem', elem: 'dom', mod: 'provide', val: 'global' },
