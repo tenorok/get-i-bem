@@ -1,6 +1,6 @@
 {
     "name": "i-bem",
-    "version": "3.5.1",
+    "version": "3.6.0",
     "main": "i-bem/i-bem.js",
     "license": "MIT",
     "ignore": [
