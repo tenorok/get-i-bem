@@ -42,6 +42,19 @@ module.exports = function(grunt) {
             }
         },
         prompt: {
+            removeDomReady: {
+                options: {
+                    questions: [
+                        {
+                            config: 'isRemoveDomReady',
+                            type: 'confirm',
+                            default: false,
+                            message: 'Please remove $.ready from ./i-bem/i-bem.js \n' +
+                            'https://github.com/bem/bem-core/blob/v2.6.0/common.blocks/i-bem/__dom/i-bem__dom.js#L227'
+                        }
+                    ]
+                }
+            },
             release: {
                 options: {
                     questions: [
@@ -93,6 +106,9 @@ module.exports = function(grunt) {
 
         grunt.task.run('shell:install', 'shell:make');
         grunt.task.run('test');
+
+        grunt.task.run('prompt:removeDomReady');
+
         grunt.task.run('uglify:release', 'copy');
 
         grunt.task.run('shell:addJSONFiles', 'shell:commitJSONFiles');
