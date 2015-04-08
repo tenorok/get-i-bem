@@ -3,6 +3,6 @@
         { block: 'jquery' }
     ],
     mustDeps: [
-        { block: 'i-jquery' }
+        { block: 'inherit', mod: 'provide', val: 'jquery' }
     ]
 });
